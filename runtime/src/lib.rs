@@ -274,9 +274,17 @@ impl pallet_sudo::Config for Runtime {
 	type Call = Call;
 }
 
+parameter_types! {
+	// One can owned at most 9,999 Kitties
+	pub const MaxNFTOwned: u32 = 9999;
+}
+
 /// Configure the pallet-template in pallets/template.
 impl pallet_template::Config for Runtime {
 	type Event = Event;
+	type Currency = Balances; 
+	type NFTRandomness = RandomnessCollectiveFlip;
+	type MaxNFTOwned = MaxNFTOwned;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.

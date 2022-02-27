@@ -174,7 +174,7 @@ pub mod pallet {
 			let sender = ensure_signed(origin)?;
 
 			let mut nft = NFTs::<T>::get(&nft_id).ok_or(Error::<T>::NoNFT)?;
-			ensure!(sender != nft.owner, Error::<T>::NotOwner);
+			ensure!(sender == nft.owner, Error::<T>::NotOwner);
 
 			nft.price = price;
 			NFTs::<T>::insert(&nft_id, nft);
